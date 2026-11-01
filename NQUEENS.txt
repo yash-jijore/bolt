@@ -1,0 +1,62 @@
+#NQUEENS
+
+def is_safe(board, row, col, n):
+
+    # Same column
+    for i in range(row):
+        if board[i][col] == 1:
+            return False
+
+    # Left diagonal
+    i = row - 1
+    j = col - 1
+
+    while i >= 0 and j >= 0:
+        if board[i][j] == 1:
+            return False
+
+        i -= 1
+        j -= 1
+
+    # Right diagonal
+    i = row - 1
+    j = col + 1
+
+    while i >= 0 and j < n:
+        if board[i][j] == 1:
+            return False
+
+        i -= 1
+        j += 1
+
+    return True
+
+
+def solve(board, row, n):
+
+    # If all queens are placed
+    if row == n:
+        for r in board:
+            print(r)
+        print()
+        return
+
+    # Try all columns
+    for col in range(n):
+
+        if is_safe(board, row, col, n):
+
+            # Place queen
+            board[row][col] = 1
+
+            # Recursive call
+            solve(board, row + 1, n)
+
+            # Backtracking
+            board[row][col] = 0
+
+
+n = 4
+board = [[0 for _ in range(n)] for _ in range(n)]
+
+solve(board, 0, n)

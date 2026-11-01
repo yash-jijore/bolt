@@ -1,0 +1,35 @@
+
+import heapq
+
+def huffman(chars, freq):
+
+    heap = []
+
+    for i in range(len(chars)):
+        heapq.heappush(heap, (freq[i], chars[i], None, None))
+
+    while len(heap) > 1:
+
+        f1, c1, l1, r1 = heapq.heappop(heap)
+        f2, c2, l2, r2 = heapq.heappop(heap)
+
+        heapq.heappush(heap, (f1 + f2, c1 + c2,
+                              (c1, l1, r1), (c2, l2, r2)))
+
+    def generate(node, code=""):
+        freq, chars, left, right = node
+
+        if left is None and right is None:
+            print(chars, ":", code)
+            return
+
+        generate(left, code + "0")
+        generate(right, code + "1")
+
+    generate(heap[0])
+
+
+chars = ['a', 'b', 'c', 'd']
+freq = [5, 9, 12, 13]
+
+huffman(chars, freq)
