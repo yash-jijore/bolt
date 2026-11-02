@@ -1,0 +1,11 @@
+n = int(input("Enter number of items: "))
+val = list(map(int, input("Enter values (space separated): ").split()))
+wt = list(map(int, input("Enter weights (space separated): ").split()))
+W = int(input("Enter knapsack capacity: "))
+
+
+for i in range(n):
+    v, w = map(int, input(f"Enter value and weight of item {i+1}: ").split())
+    arr.append((v, w))
+
+W = int(input("Enter knapsack capacity: "))
